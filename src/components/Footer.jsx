@@ -62,8 +62,8 @@ export default function Footer() {
           <p className="text-[8.5px] uppercase tracking-label text-gold-mid mb-4">Contact Us</p>
           <ul className="space-y-2 text-[11px] text-white/65">
             <li>
-              <a href="mailto:fluentedgeedu@gmail.com" className="hover:text-gold-light">
-                fluentedgeedu@gmail.com
+              <a href="mailto:contact.fluentenglishedu@gmail.com" className="hover:text-gold-light">
+                contact.fluentenglishedu@gmail.com
               </a>
             </li>
             <li>+91 92107 83250</li>

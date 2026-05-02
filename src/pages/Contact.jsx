@@ -153,7 +153,7 @@ export default function Contact() {
             <p className="label-cap">Reach Us Directly</p>
             <div className="mt-6 space-y-6">
               {[
-                ['Email', 'fluentedgeedu@gmail.com', 'mailto:fluentedgeedu@gmail.com'],
+                ['Email', 'contact.fluentenglishedu@gmail.com', 'mailto:contact.fluentenglishedu@gmail.com'],
                 ['Phone / WhatsApp', '+91 92107 83250\n+91 93106 33126', 'tel:+919210783250'],
                 ['Instagram', '@fluentedge_edu', 'https://instagram.com/fluentedge_edu'],
                 ['LinkedIn', 'Fluent English', '#'],
