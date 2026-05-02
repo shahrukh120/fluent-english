@@ -78,7 +78,7 @@ function userEmailHtml(d) {
       <p style="margin:28px 0 0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:14px;color:#1E2D50;">Warmly,<br/>The Fluent English Team</p>
     </div>
     <div style="background:#0B1426;color:rgba(255,255,255,0.4);padding:16px 28px;font-size:10px;text-align:center;letter-spacing:0.06em;">
-      Fluent English © 2026 · contact.fluentenglishedu@gmail.com · @fluentedge_edu
+      Fluent English © 2026 · contact.fluentenglishedu@gmail.com · @fluentenglish_edu
     </div>
   </div>`;
 }

@@ -20,7 +20,7 @@ export default function Footer() {
           </p>
           <div className="flex gap-3 mt-5">
             <a
-              href="https://instagram.com/fluentedge_edu"
+              href="https://instagram.com/fluentenglish_edu"
               target="_blank"
               rel="noreferrer"
               className="border border-white/15 px-3 py-2 text-[9px] uppercase tracking-wider hover:bg-white/5 transition-colors"
@@ -67,8 +67,8 @@ export default function Footer() {
               </a>
             </li>
             <li>
-              <a href="https://instagram.com/fluentedge_edu" target="_blank" rel="noreferrer" className="hover:text-gold-light">
-                @fluentedge_edu
+              <a href="https://instagram.com/fluentenglish_edu" target="_blank" rel="noreferrer" className="hover:text-gold-light">
+                @fluentenglish_edu
               </a>
             </li>
             <li>

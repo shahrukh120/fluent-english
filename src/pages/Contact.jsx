@@ -37,7 +37,7 @@ export default function Contact() {
             <p className="label-cap">Reach Us Directly</p>
             <div className="mt-6 space-y-6">
               <ContactItem label="Email" value="contact.fluentenglishedu@gmail.com" href="mailto:contact.fluentenglishedu@gmail.com" />
-              <ContactItem label="Instagram" value="@fluentedge_edu" href="https://instagram.com/fluentedge_edu" />
+              <ContactItem label="Instagram" value="@fluentenglish_edu" href="https://instagram.com/fluentenglish_edu" />
               <ContactItem label="LinkedIn" value="Fluent English" href="https://www.linkedin.com/company/fluentedgeenglish/" />
             </div>
             <p className="mt-10 font-serif italic text-[14px] text-ink-slate max-w-md">
