@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply font-sans text-ink bg-white antialiased;
+    font-feature-settings: 'kern', 'liga';
+  }
+  *,
+  *::before,
+  *::after {
+    border-radius: 0 !important;
+  }
+}
+
+@layer components {
+  .container-fe {
+    @apply max-w-[1200px] mx-auto px-6 md:px-10;
+  }
+  .label-cap {
+    @apply font-sans uppercase tracking-label text-[9px] font-medium text-gold-mid;
+  }
+  .section-title {
+    @apply font-serif font-bold text-[28px] md:text-[32px] leading-tight text-navy;
+  }
+  .section-title-light {
+    @apply font-serif font-bold text-[28px] md:text-[32px] leading-tight text-white;
+  }
+  .gold-bar {
+    @apply block w-8 h-[2px] bg-gold mt-3 mb-5;
+  }
+  .body-text {
+    @apply font-sans text-[12px] leading-[1.85] text-ink-slate;
+  }
+  .btn-gold {
+    @apply inline-flex items-center justify-center bg-gold hover:bg-gold-mid transition-colors duration-200 text-white font-sans font-semibold text-[12px] tracking-wide px-5 py-3;
+  }
+  .btn-ghost {
+    @apply inline-flex items-center justify-center bg-transparent border border-white/80 hover:bg-white/5 transition-colors duration-200 text-white font-sans font-medium text-[12px] tracking-wide px-5 py-3;
+  }
+  .card-base {
+    @apply bg-white border border-border-light p-5;
+  }
+  .card-top-navy {
+    @apply border-t-[3px] border-t-navy-royal;
+  }
+  .pull-quote {
+    @apply bg-gold-cream border-l-[3px] border-l-gold p-5 font-serif italic text-[16px] md:text-[17px] text-navy-dark;
+  }
+  .diamond {
+    @apply inline-block w-3 h-3 bg-gold rotate-45;
+  }
+  .diamond-small {
+    @apply inline-block w-[6px] h-[6px] bg-gold rotate-45;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.fade-in {
+  animation: fadeIn 0.6s ease-in both;
+}
+.fade-in-up {
+  animation: fadeInUp 0.6s ease-in both;
+}
+.slide-up {
+  animation: slideUp 0.5s ease-out 0.4s both;
+}
+
+/* Reveal-on-scroll util */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+/* Safety net: if JS / observer hasn't revealed a section after 1.2s, show it anyway */
+@keyframes revealFallback {
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  animation: revealFallback 0.01s ease-out 1.2s forwards;
+}
+
+/* Form fields - sharp corners */
+input,
+select,
+textarea,
+button {
+  border-radius: 0 !important;
+}
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: #B8922A;
+  box-shadow: 0 0 0 1px #B8922A;
+}
+
+/* Hide horizontal scrollbar on course strip */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
