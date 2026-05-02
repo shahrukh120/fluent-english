@@ -34,37 +34,54 @@ function FEMark({ size = 40 }) {
         </linearGradient>
       </defs>
 
-      {/* Outer kite */}
-      <path d="M120,8 L228,120 L120,232 L12,120 Z" stroke="url(#feKite1)" strokeWidth="1.2" fill="none" />
-      {/* Inner kite */}
-      <path d="M120,20 L216,120 L120,220 L24,120 Z" stroke="url(#feKite2)" strokeWidth="0.6" fill="none" />
+      {/* Rotating kite frame — rotates around exact center (120,120) */}
+      <g>
+        <animateTransform
+          attributeName="transform"
+          attributeType="XML"
+          type="rotate"
+          from="0 120 120"
+          to="360 120 120"
+          dur="30s"
+          repeatCount="indefinite"
+        />
+        {/* Outer kite */}
+        <path d="M120,8 L228,120 L120,232 L12,120 Z" stroke="url(#feKite1)" strokeWidth="1.2" fill="none" />
+        {/* Inner kite */}
+        <path d="M120,20 L216,120 L120,220 L24,120 Z" stroke="url(#feKite2)" strokeWidth="0.6" fill="none" />
 
-      {/* Tip ticks */}
-      <line x1="120" y1="8" x2="120" y2="18" stroke="#F0CC78" strokeWidth="1.2" opacity="0.8" />
-      <line x1="228" y1="120" x2="218" y2="120" stroke="#F0CC78" strokeWidth="1.2" opacity="0.8" />
-      <line x1="120" y1="232" x2="120" y2="222" stroke="#F0CC78" strokeWidth="1.2" opacity="0.8" />
-      <line x1="12" y1="120" x2="22" y2="120" stroke="#F0CC78" strokeWidth="1.2" opacity="0.8" />
+        {/* Tip ticks */}
+        <line x1="120" y1="8" x2="120" y2="18" stroke="#F0CC78" strokeWidth="1.2" opacity="0.8" />
+        <line x1="228" y1="120" x2="218" y2="120" stroke="#F0CC78" strokeWidth="1.2" opacity="0.8" />
+        <line x1="120" y1="232" x2="120" y2="222" stroke="#F0CC78" strokeWidth="1.2" opacity="0.8" />
+        <line x1="12" y1="120" x2="22" y2="120" stroke="#F0CC78" strokeWidth="1.2" opacity="0.8" />
 
-      {/* Mid ticks */}
-      <line x1="174" y1="64" x2="168.5" y2="69.5" stroke="#B8922A" strokeWidth="0.8" opacity="0.55" />
-      <line x1="174" y1="176" x2="168.5" y2="170.5" stroke="#B8922A" strokeWidth="0.8" opacity="0.55" />
-      <line x1="66" y1="176" x2="71.5" y2="170.5" stroke="#B8922A" strokeWidth="0.8" opacity="0.55" />
-      <line x1="66" y1="64" x2="71.5" y2="69.5" stroke="#B8922A" strokeWidth="0.8" opacity="0.55" />
+        {/* Mid ticks */}
+        <line x1="174" y1="64" x2="168.5" y2="69.5" stroke="#B8922A" strokeWidth="0.8" opacity="0.55" />
+        <line x1="174" y1="176" x2="168.5" y2="170.5" stroke="#B8922A" strokeWidth="0.8" opacity="0.55" />
+        <line x1="66" y1="176" x2="71.5" y2="170.5" stroke="#B8922A" strokeWidth="0.8" opacity="0.55" />
+        <line x1="66" y1="64" x2="71.5" y2="69.5" stroke="#B8922A" strokeWidth="0.8" opacity="0.55" />
 
-      {/* Diamond gems at 4 tips */}
-      <rect x="116.5" y="4.5" width="7" height="7" transform="rotate(45 120 8)" fill="#F0CC78" opacity="0.9" />
-      <rect x="224.5" y="116.5" width="7" height="7" transform="rotate(45 228 120)" fill="#F0CC78" opacity="0.9" />
-      <rect x="116.5" y="228.5" width="7" height="7" transform="rotate(45 120 232)" fill="#F0CC78" opacity="0.9" />
-      <rect x="8.5" y="116.5" width="7" height="7" transform="rotate(45 12 120)" fill="#F0CC78" opacity="0.9" />
+        {/* Diamond gems at 4 tips */}
+        <rect x="116.5" y="4.5" width="7" height="7" transform="rotate(45 120 8)" fill="#F0CC78" opacity="0.9" />
+        <rect x="224.5" y="116.5" width="7" height="7" transform="rotate(45 228 120)" fill="#F0CC78" opacity="0.9" />
+        <rect x="116.5" y="228.5" width="7" height="7" transform="rotate(45 120 232)" fill="#F0CC78" opacity="0.9" />
+        <rect x="8.5" y="116.5" width="7" height="7" transform="rotate(45 12 120)" fill="#F0CC78" opacity="0.9" />
 
-      {/* Accent inner line */}
-      <path d="M120,14 L222,120 L120,226 L18,120 Z" stroke="#1A3A8F" strokeWidth="0.4" fill="none" opacity="0.5" />
-
-      {/* FE monogram */}
-      <g fontFamily="'Cormorant Garamond', 'EB Garamond', Georgia, serif">
-        <text x="92" y="158" fontSize="105" fontWeight="700" fill="url(#feGoldF)">F</text>
-        <text x="148" y="158" fontSize="78" fontWeight="500" fill="url(#feGoldE)" opacity="0.9">E</text>
+        {/* Accent inner line */}
+        <path d="M120,14 L222,120 L120,226 L18,120 Z" stroke="#1A3A8F" strokeWidth="0.4" fill="none" opacity="0.5" />
       </g>
+
+      {/* FE monogram — centered on (120, 120), does NOT rotate */}
+      <text
+        x="120"
+        y="152"
+        textAnchor="middle"
+        fontFamily="'Cormorant Garamond', 'EB Garamond', Georgia, serif"
+      >
+        <tspan fontSize="105" fontWeight="700" fill="url(#feGoldF)">F</tspan>
+        <tspan fontSize="78" fontWeight="500" fill="url(#feGoldE)" opacity="0.9" dx="-4">E</tspan>
+      </text>
     </svg>
   );
 }
