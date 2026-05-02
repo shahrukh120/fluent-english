@@ -66,7 +66,7 @@ function CourseSection({ c }) {
       </div>
 
       <div className="bg-border-light px-6 md:px-10 py-3 flex flex-wrap items-center gap-x-6 gap-y-2 text-[10px] text-navy-dark">
-        {['60 Min / Session', 'Live & 1-on-1', 'Customised & Flexible', 'Daily Progress Report'].map((x) => (
+        {(c.sessionInfo || ['60 Min / Session', 'Live & 1-on-1', 'Customised & Flexible', 'Daily Progress Report']).map((x) => (
           <span key={x} className="inline-flex items-center gap-2">
             <span className="block w-[5px] h-[5px] bg-gold rotate-45" />
             {x}

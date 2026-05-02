@@ -1,35 +1,35 @@
 export const TESTIMONIALS = [
   {
     name: 'Ananya Sharma',
-    role: 'Marketing Associate',
+    role: 'MBA Student',
     course: 'Communication Mastery',
     stars: 4,
     quote:
-      'I used to ramble in client calls. Three months in, my manager said my updates are the clearest in the team. The change is real.',
+      "I used to freeze during group discussions. Now I'm the first to speak. The personalised feedback after every class was the game-changer for me.",
   },
   {
     name: 'Rohan Verma',
-    role: 'Senior Analyst',
+    role: 'Advocate',
     course: 'Professional English',
     stars: 5,
     quote:
-      "Fluent English didn't just teach me English — they rebuilt how I think before I speak. My boardroom presence has completely changed.",
+      "My coach understood exactly what I needed for my industry. The sessions were tailored to legal communication specifically. I've never had that before.",
   },
   {
     name: 'Priya Nair',
-    role: 'Software Engineer',
+    role: 'Finance Graduate',
     course: 'Interview Advantage',
     stars: 4,
     quote:
-      'I cleared three rounds at a top product company. The mock interviews and feedback were brutally honest — exactly what I needed.',
+      'I cleared three interviews back-to-back after completing The Interview Advantage course. The mock sessions made the real thing feel effortless.',
   },
   {
     name: 'Sahil Kapoor',
-    role: 'Founder',
+    role: 'Tech Professional',
     course: 'Public Speaking',
     stars: 4,
     quote:
-      'I delivered my first investor pitch without notes. The voice and stage work in my sessions made all the difference.',
+      "Worth every rupee. I went from dreading presentations to actually enjoying them. The 1-on-1 format is so much more effective than any class I've attended.",
   },
 ];
 

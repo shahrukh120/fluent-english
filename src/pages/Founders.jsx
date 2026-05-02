@@ -3,16 +3,20 @@ import PageHero from '../components/PageHero.jsx';
 const FOUNDERS = [
   {
     name: 'Bisma Fareed',
-    role: 'Founder & Lead Coach',
+    role: 'Founder · Fluent English',
     image: '/founders/bisma.png',
+    instagram: 'https://instagram.com/heyy_bisma',
+    instagramHandle: '@heyy_bisma',
     tags: ['Elite Communication Coach', 'Public Speaker', 'Debator', 'LinkedIn Writer 9K+'],
     bio: 'An English Honours student at Hansraj College, Bisma is an elite communication coach, a polished public speaker, and a seasoned debator. She has conducted 500+ English speaking sessions across multiple platforms, developing a reputation for transforming hesitant speakers into confident communicators. As a LinkedIn writer with over 9,000 followers, her content on language, confidence, and professional communication reaches thousands daily. Bisma founded Fluent English with a single conviction: that every brilliant mind deserves to be heard clearly.',
   },
   {
     name: 'Sunan Fareed',
-    role: 'Co-Founder & Coach',
+    role: 'Co-Founder · Fluent English',
     image: '/founders/sunan.png',
-    tags: ['Certified Mentor', 'Communication Coach', 'Convent Educated', 'Social Media Strategist'],
+    instagram: 'https://instagram.com/fynsunan',
+    instagramHandle: '@fynsunan',
+    tags: ['Certified Mentor', 'Communication Coach', 'Public Speaker', 'Social Media Strategist'],
     bio: 'A convent-educated student pursuing English Honours, Sunan is a certified mentor and communication coach with 300+ sessions under her belt. Known for her structured teaching style and warm coaching presence, she has mentored students as a freelancer while simultaneously building Fluent English\'s brand from the ground up. She is the creative and strategic mind behind our marketing and social media — and the reason Fluent English speaks with one clear, compelling voice.',
   },
 ];
@@ -63,9 +67,10 @@ export default function Founders() {
                   {f.bio}
                 </p>
 
-                <div className="mt-6 flex gap-3">
+                <div className="mt-6 flex flex-wrap gap-3 items-center">
                   <a href="#" target="_blank" rel="noreferrer" className="border border-border-light text-[9px] uppercase tracking-wider px-3 py-2 hover:border-gold transition-colors">LinkedIn</a>
-                  <a href="https://instagram.com/fluentedge_edu" target="_blank" rel="noreferrer" className="border border-border-light text-[9px] uppercase tracking-wider px-3 py-2 hover:border-gold transition-colors">Instagram</a>
+                  <a href={f.instagram} target="_blank" rel="noreferrer" className="border border-border-light text-[9px] uppercase tracking-wider px-3 py-2 hover:border-gold transition-colors">Instagram</a>
+                  <span className="text-[10px] text-ink-slate">{f.instagramHandle}</span>
                 </div>
               </div>
             </article>
