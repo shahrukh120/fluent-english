@@ -325,7 +325,7 @@ function FoundersTeaser() {
                 src={f.image}
                 alt={f.name}
                 className="w-[100px] h-[100px] flex-shrink-0 object-cover"
-                style={{ clipPath: 'circle(50% at 50% 50%)', objectPosition: 'center top' }}
+                style={{ clipPath: 'circle(50% at 50% 50%)', objectPosition: 'center center' }}
                 loading="lazy"
               />
               <div>
