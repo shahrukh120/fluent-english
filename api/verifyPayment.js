@@ -21,16 +21,24 @@ function adminEmailHtml(d) {
         ['Name', d.name],
         ['Email', d.email],
         ['Phone', d.phone],
-        ['Course', d.course],
+        ['Country / State', `${d.country || '—'} / ${d.state || '—'}`],
+        ['Profile', d.profile || '—'],
+        ...(d.profile === 'Working Professional' ? [['Profession', d.profession || '—']] : []),
+        ...(d.profile === 'Student' ? [
+          ['College', d.college || '—'],
+          ['Course of Study', d.course_field || '—'],
+          ['Year', d.year || '—'],
+        ] : []),
+        ['Level of English', d.englishLevel || '—'],
+        ['Programme', d.programme || d.course || '—'],
+        ['Duration', d.duration || '—'],
         ['Amount', `₹${d.amount}`],
         ['Payment ID', d.payment_id],
         ['Order ID', d.order_id],
-        ['Preferred Time', d.preferred_time || '—'],
-        ['Challenge', d.challenge || '—'],
       ]
         .map(
           ([k, v]) =>
-            `<tr><td style="padding:10px 16px;border-bottom:1px solid #E4E9F5;font-weight:600;width:140px;">${k}</td><td style="padding:10px 16px;border-bottom:1px solid #E4E9F5;">${escapeHtml(v)}</td></tr>`
+            `<tr><td style="padding:10px 16px;border-bottom:1px solid #E4E9F5;font-weight:600;width:170px;vertical-align:top;">${k}</td><td style="padding:10px 16px;border-bottom:1px solid #E4E9F5;">${escapeHtml(v)}</td></tr>`
         )
         .join('')}
     </table>
@@ -61,7 +69,7 @@ function userEmailHtml(d) {
         <li style="margin-bottom:6px;">You'll receive a personalised programme built around your goals.</li>
       </ul>
 
-      <p style="margin:24px 0 0;font-size:12px;color:#3A4D7A;">If you have any questions, reply to this email or reach us on WhatsApp at <strong>+91 92107 83250</strong>.</p>
+      <p style="margin:24px 0 0;font-size:12px;color:#3A4D7A;">If you have any questions, simply reply to this email — we'll be in touch.</p>
 
       <p style="margin:28px 0 0;font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:14px;color:#1E2D50;">Warmly,<br/>The Fluent English Team</p>
     </div>
@@ -85,8 +93,16 @@ export default async function handler(req, res) {
       phone,
       course,
       amount,
-      challenge,
-      preferred_time,
+      country,
+      state,
+      profile,
+      profession,
+      college,
+      course_field,
+      year,
+      englishLevel,
+      programme,
+      duration,
     } = req.body || {};
 
     if (!razorpay_order_id || !razorpay_payment_id || !razorpay_signature) {
@@ -126,8 +142,16 @@ export default async function handler(req, res) {
       amount,
       payment_id: razorpay_payment_id,
       order_id: razorpay_order_id,
-      challenge,
-      preferred_time,
+      country,
+      state,
+      profile,
+      profession,
+      college,
+      course_field,
+      year,
+      englishLevel,
+      programme,
+      duration,
     };
 
     await Promise.all([

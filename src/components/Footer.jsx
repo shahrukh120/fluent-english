@@ -66,14 +66,16 @@ export default function Footer() {
                 contact.fluentenglishedu@gmail.com
               </a>
             </li>
-            <li>+91 92107 83250</li>
-            <li>+91 93106 33126</li>
             <li>
               <a href="https://instagram.com/fluentedge_edu" target="_blank" rel="noreferrer" className="hover:text-gold-light">
                 @fluentedge_edu
               </a>
             </li>
-            <li>Fluent English (LinkedIn)</li>
+            <li>
+              <a href="https://www.linkedin.com/company/fluentedgeenglish/" target="_blank" rel="noreferrer" className="hover:text-gold-light">
+                Fluent English (LinkedIn)
+              </a>
+            </li>
           </ul>
         </div>
       </div>
