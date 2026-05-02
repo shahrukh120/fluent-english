@@ -1,6 +1,6 @@
 export default function WhatsAppButton() {
   const msg = encodeURIComponent(
-    "Hi Fluent English! I'd like to book a free diagnostic call."
+    "Hi Fluent English! I'd like to book a free demo call."
   );
   const href = `https://wa.me/919210783250?text=${msg}`;
   return (

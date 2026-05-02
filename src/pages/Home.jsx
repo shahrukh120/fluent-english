@@ -75,7 +75,7 @@ function Hero() {
 
         <div className="mt-10 flex flex-wrap gap-4 fade-in-up" style={{ animationDelay: '0.6s' }}>
           <Link to="/contact" className="btn-gold">
-            Book a Free Diagnostic Call
+            Book a Free Demo Call
           </Link>
           <Link to="/courses" className="btn-ghost">
             Explore Our Programmes
@@ -137,7 +137,7 @@ function ProblemSection() {
 
 function HowItWorks() {
   const steps = [
-    ['Diagnostic Call (Free)', 'We spend 20 minutes understanding your communication challenges, goals, and industry. No sales pressure — just clarity.'],
+    ['Demo Call (Free)', 'We spend 45 minutes understanding your communication challenges, goals, and industry. No sales pressure — just clarity.'],
     ['Custom Programme Design', 'Your coach designs a session plan built entirely around your specific gaps. Every session has a purpose.'],
     ['Live 1-on-1 Sessions', '60-minute private sessions at your chosen time. Interactive, practical, and intensely focused on you.'],
     ['Daily Progress Reports', 'After every session, you receive a written report — what improved, what to work on, and your next steps.'],
@@ -201,7 +201,7 @@ function ProgrammesOverview() {
         <div className="mt-12 border border-white/10 p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between gap-4">
           <p className="text-[14px] text-white/85 font-serif italic">Not sure which programme is right for you?</p>
           <Link to="/contact" className="btn-gold !text-navy">
-            <span className="text-navy">Book a Free Diagnostic Call</span>
+            <span className="text-navy">Book a Free Demo Call</span>
           </Link>
         </div>
       </div>
@@ -354,7 +354,7 @@ function FinalCTA() {
           Ready to build your <span className="italic font-normal">Mind to Mouth</span> connection?
         </h2>
         <p className="text-[11px] text-white/45 mt-4 max-w-xl mx-auto">
-          Enrolments open. Limited seats per cohort. Book your free 20-minute diagnostic call today.
+          Enrolments open. Limited seats per cohort. Book your free 45-minute demo call today.
         </p>
         <Link to="/contact" className="inline-flex mt-8 bg-gold hover:bg-gold-mid text-navy font-sans font-semibold text-[13px] px-7 py-4 transition-colors">
           Book My Free Call

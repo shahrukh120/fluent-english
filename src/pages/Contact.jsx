@@ -10,7 +10,7 @@ const PROGRAMMES = [
 
 const SESSION_TIMES = ['Morning', 'Afternoon', 'Evening', 'Flexible'];
 
-// Default amount for the diagnostic call deposit (₹) — adjust as needed.
+// Default amount for the demo call deposit (₹) — adjust as needed.
 // If a course is preselected via query param, its hourly price is used.
 const DEFAULT_AMOUNT = 99;
 
@@ -143,7 +143,7 @@ export default function Contact() {
         label="Get In Touch"
         title="Ready to build your"
         italicWord="Mind to Mouth connection?"
-        sub="Enrolments open. Limited seats per cohort. Book your free diagnostic call today."
+        sub="Enrolments open. Limited seats per cohort. Book your free demo call today."
       />
 
       <section className="bg-white py-16">
@@ -193,7 +193,7 @@ export default function Contact() {
             ) : (
               <form onSubmit={onSubmit} className="space-y-5">
                 <div>
-                  <h3 className="font-serif font-bold text-[22px] text-navy">Book Your Free 20-Min Diagnostic Call</h3>
+                  <h3 className="font-serif font-bold text-[22px] text-navy">Book Your Free 45-Min Demo Call</h3>
                   <p className="text-[10px] text-ink-slate mt-1">A small ₹{amount} confirmation deposit secures your slot.</p>
                 </div>
 
@@ -229,7 +229,7 @@ export default function Contact() {
                 </button>
 
                 <div className="flex flex-wrap items-center gap-x-5 gap-y-2 pt-3 text-[10px] text-ink-slate">
-                  {['No payment required for the call', '20 minutes, no pressure', 'Limited spots per cohort'].map((x) => (
+                  {['No payment required for the call', '45 minutes, no pressure', 'Limited spots per cohort'].map((x) => (
                     <span key={x} className="inline-flex items-center gap-2">
                       <span className="block w-[6px] h-[6px] bg-gold rotate-45" />
                       {x}
