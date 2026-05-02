@@ -45,6 +45,12 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error('createOrder error:', err);
-    return res.status(500).json({ error: 'Could not create order.' });
+    // Bubble Razorpay's actual error message up so the user sees the real reason
+    // (e.g. account not activated, amount too small, etc.).
+    const rzpMsg =
+      err?.error?.description ||
+      err?.message ||
+      'Could not create order.';
+    return res.status(500).json({ error: `Razorpay: ${rzpMsg}` });
   }
 }
