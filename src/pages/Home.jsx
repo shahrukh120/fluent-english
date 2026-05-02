@@ -317,15 +317,15 @@ function FoundersTeaser() {
         </h2>
         <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
           {[
-            { name: 'Bisma Fareed', role: 'Founder & Lead Coach', cred: 'English Honours · Hansraj College · 500+ sessions', image: '/founders/bisma.png' },
-            { name: 'Sunan Fareed', role: 'Co-Founder & Coach', cred: 'English Honours · Certified Mentor · 300+ sessions', image: '/founders/sunan.png' },
+            { name: 'Bisma Fareed', role: 'Founder & Lead Coach', cred: 'English Honours · Hansraj College · 500+ sessions', image: '/founders/bisma.png', pos: '50% 35%' },
+            { name: 'Sunan Fareed', role: 'Co-Founder & Coach', cred: 'English Honours · Certified Mentor · 300+ sessions', image: '/founders/sunan.png', pos: '70% 35%' },
           ].map((f) => (
             <div key={f.name} className="border border-white/10 p-6 flex items-center gap-5">
               <img
                 src={f.image}
                 alt={f.name}
                 className="w-[100px] h-[100px] flex-shrink-0 object-cover"
-                style={{ clipPath: 'circle(50% at 50% 50%)', objectPosition: 'center center' }}
+                style={{ clipPath: 'circle(50% at 50% 50%)', objectPosition: f.pos }}
                 loading="lazy"
               />
               <div>
