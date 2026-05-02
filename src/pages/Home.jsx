@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { CornerBracket, DiamondOrnament, TripleDiamondDivider, GoldDiamondBullet } from '../components/Ornaments.jsx';
+import { LogoStacked } from '../components/Logo.jsx';
 import { COURSES } from '../data/courses.js';
 import { TESTIMONIALS, FEATURED_TESTIMONIAL } from '../data/testimonials.js';
 
@@ -41,39 +42,30 @@ function Hero() {
         FE
       </span>
 
-      <div className="container-fe flex-1 flex flex-col justify-center relative z-10 py-20">
+      <div className="container-fe flex-1 flex flex-col justify-center items-center text-center relative z-10 py-20">
         <p className="label-cap fade-in" style={{ animationDelay: '0.05s' }}>
           Elite English Communication Coaching
         </p>
 
-        <div className="mt-6 fade-in-up" style={{ animationDelay: '0.1s' }}>
-          <DiamondOrnament size={48} />
+        <div className="mt-8 fade-in-up" style={{ animationDelay: '0.2s' }}>
+          <LogoStacked markSize={220} />
         </div>
 
-        <h1
-          className="font-serif font-bold text-white mt-6 fade-in-up"
-          style={{ fontSize: 'clamp(48px, 8vw, 72px)', lineHeight: 0.95, animationDelay: '0.2s' }}
-        >
-          FLUENT <span className="text-gold-light">ENGLISH</span>
-        </h1>
-
-        <TripleDiamondDivider light />
-
         <p
-          className="font-serif italic text-white/70 fade-in-up"
+          className="mt-8 font-serif italic text-white/70 fade-in-up"
           style={{ fontSize: 22, letterSpacing: '0.02em', animationDelay: '0.4s' }}
         >
           Building That Mind to Mouth Connection
         </p>
 
         <p
-          className="mt-6 font-sans text-[12px] text-white/45 fade-in-up"
+          className="mt-6 font-sans text-[12px] text-white/45 fade-in-up max-w-2xl"
           style={{ lineHeight: 2, letterSpacing: '0.04em', animationDelay: '0.5s' }}
         >
           Personalised · Live · One-on-One · 60-Minute Sessions For Professionals & Ambitious Learners
         </p>
 
-        <div className="mt-10 flex flex-wrap gap-4 fade-in-up" style={{ animationDelay: '0.6s' }}>
+        <div className="mt-10 flex flex-wrap justify-center gap-4 fade-in-up" style={{ animationDelay: '0.6s' }}>
           <Link to="/contact" className="btn-gold">
             Book a Free Demo Call
           </Link>

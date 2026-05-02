@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { NavLink, Link, useLocation } from 'react-router-dom';
+import { LogoInline } from './Logo.jsx';
 
 const links = [
   { to: '/', label: 'Home' },
@@ -32,8 +33,8 @@ export default function Navbar() {
       style={{ height: 64 }}
     >
       <div className="container-fe h-full flex items-center justify-between">
-        <Link to="/" className="font-serif font-bold text-[22px] tracking-brand text-white">
-          FLUENT <span className="text-gold-light">ENGLISH</span>
+        <Link to="/" aria-label="Fluent English — Home">
+          <LogoInline markSize={36} wordmarkSize={20} />
         </Link>
 
         <nav className="hidden lg:flex items-center gap-8">

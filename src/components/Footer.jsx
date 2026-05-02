@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import { LogoInline } from './Logo.jsx';
 
 export default function Footer() {
   return (
@@ -11,8 +12,8 @@ export default function Footer() {
       />
       <div className="container-fe py-14 grid grid-cols-1 md:grid-cols-3 gap-10">
         <div>
-          <Link to="/" className="font-serif font-bold text-[20px] tracking-brand text-white">
-            FLUENT <span className="text-gold-light">ENGLISH</span>
+          <Link to="/" aria-label="Fluent English — Home">
+            <LogoInline markSize={44} wordmarkSize={20} />
           </Link>
           <p className="mt-3 font-serif italic text-[13px] text-white/45">
             Building That Mind to Mouth Connection
