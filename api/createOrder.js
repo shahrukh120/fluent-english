@@ -1,5 +1,16 @@
 import Razorpay from 'razorpay';
 
+// Razorpay's `notes` field rejects 4-byte UTF-8 (emoji / characters outside the BMP)
+// and most ASCII control characters. Strip them defensively so user input never breaks
+// order creation.
+function sanitize(s, max) {
+  return String(s == null ? '' : s)
+    .replace(/[\u{10000}-\u{10FFFF}]/gu, '')   // emoji + astral plane
+    .replace(/[\x00-\x1F\x7F]/g, '')           // ASCII control chars
+    .trim()
+    .slice(0, max);
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -30,10 +41,10 @@ export default async function handler(req, res) {
       currency: 'INR',
       receipt: `fe_${Date.now()}`,
       notes: {
-        name: String(name).slice(0, 100),
-        email: String(email).slice(0, 120),
-        phone: String(phone).slice(0, 20),
-        course: String(course).slice(0, 80),
+        name: sanitize(name, 100),
+        email: sanitize(email, 120),
+        phone: sanitize(phone, 20),
+        course: sanitize(course, 80),
       },
     });
 
@@ -45,8 +56,6 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error('createOrder error:', err);
-    // Bubble Razorpay's actual error message up so the user sees the real reason
-    // (e.g. account not activated, amount too small, etc.).
     const rzpMsg =
       err?.error?.description ||
       err?.message ||
