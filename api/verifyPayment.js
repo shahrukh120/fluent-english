@@ -158,9 +158,11 @@ export default async function handler(req, res) {
     // Log to Supabase first (fail-soft). `payment_id` is unique → upsert prevents
     // duplicates if verifyPayment somehow runs twice for the same payment.
     const supabase = getSupabase();
-    if (supabase) {
+    if (!supabase) {
+      console.error('enrollments upsert skipped: Supabase env vars missing');
+    } else {
       try {
-        await supabase.from('enrollments').upsert(
+        const { error } = await supabase.from('enrollments').upsert(
           {
             name,
             email,
@@ -181,8 +183,9 @@ export default async function handler(req, res) {
           },
           { onConflict: 'payment_id' }
         );
+        if (error) console.error('enrollments upsert error:', error);
       } catch (e) {
-        console.error('enrollments insert failed:', e);
+        console.error('enrollments upsert threw:', e);
       }
     }
 

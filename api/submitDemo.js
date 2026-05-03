@@ -102,17 +102,20 @@ export default async function handler(req, res) {
 
     // Log to Supabase first (fail-soft — never block the user on a logging error)
     const supabase = getSupabase();
-    if (supabase) {
+    if (!supabase) {
+      console.error('demo_requests insert skipped: Supabase env vars missing');
+    } else {
       try {
-        await supabase.from('demo_requests').insert({
+        const { error } = await supabase.from('demo_requests').insert({
           name,
           email,
           phone,
           preferred_at: datetime ? new Date(datetime).toISOString() : null,
           issues: issues || null,
         });
+        if (error) console.error('demo_requests insert error:', error);
       } catch (e) {
-        console.error('demo_requests insert failed:', e);
+        console.error('demo_requests insert threw:', e);
       }
     }
 
