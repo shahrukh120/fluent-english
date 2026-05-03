@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { getSupabase } from './_supabase.js';
 
 const escapeHtml = (s = '') =>
   String(s)
@@ -98,6 +99,22 @@ export default async function handler(req, res) {
     });
 
     const data = { name, email, phone, datetime, issues };
+
+    // Log to Supabase first (fail-soft — never block the user on a logging error)
+    const supabase = getSupabase();
+    if (supabase) {
+      try {
+        await supabase.from('demo_requests').insert({
+          name,
+          email,
+          phone,
+          preferred_at: datetime ? new Date(datetime).toISOString() : null,
+          issues: issues || null,
+        });
+      } catch (e) {
+        console.error('demo_requests insert failed:', e);
+      }
+    }
 
     await Promise.all([
       transporter.sendMail({

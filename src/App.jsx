@@ -10,6 +10,7 @@ import Courses from './pages/Courses.jsx';
 import Founders from './pages/Founders.jsx';
 import Testimonials from './pages/Testimonials.jsx';
 import Contact from './pages/Contact.jsx';
+import Admin from './pages/Admin.jsx';
 
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
@@ -70,6 +71,7 @@ export default function App() {
           <Route path="/founders" element={<Founders />} />
           <Route path="/testimonials" element={<Testimonials />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/admin" element={<Admin />} />
         </Routes>
       </main>
       <Footer />

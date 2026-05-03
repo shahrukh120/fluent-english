@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
+import { getSupabase } from './_supabase.js';
 
 const escapeHtml = (s = '') =>
   String(s)
@@ -153,6 +154,37 @@ export default async function handler(req, res) {
       programme,
       duration,
     };
+
+    // Log to Supabase first (fail-soft). `payment_id` is unique → upsert prevents
+    // duplicates if verifyPayment somehow runs twice for the same payment.
+    const supabase = getSupabase();
+    if (supabase) {
+      try {
+        await supabase.from('enrollments').upsert(
+          {
+            name,
+            email,
+            phone,
+            country: country || null,
+            state: state || null,
+            profile: profile || null,
+            profession: profession || null,
+            college: college || null,
+            course_field: course_field || null,
+            year: year || null,
+            english_level: englishLevel || null,
+            programme: programme || course || null,
+            duration: duration || null,
+            amount: Number(amount) || null,
+            payment_id: razorpay_payment_id,
+            order_id: razorpay_order_id,
+          },
+          { onConflict: 'payment_id' }
+        );
+      } catch (e) {
+        console.error('enrollments insert failed:', e);
+      }
+    }
 
     await Promise.all([
       transporter.sendMail({
