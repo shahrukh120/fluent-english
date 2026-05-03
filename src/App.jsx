@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Navbar from './components/Navbar.jsx';
 import Footer from './components/Footer.jsx';
 import BackToTop from './components/BackToTop.jsx';
+import { Analytics } from '@vercel/analytics/react';
 import Home from './pages/Home.jsx';
 import About from './pages/About.jsx';
 import Courses from './pages/Courses.jsx';
@@ -73,6 +74,7 @@ export default function App() {
       </main>
       <Footer />
       <BackToTop />
+      <Analytics />
     </div>
   );
 }
