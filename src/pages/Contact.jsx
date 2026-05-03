@@ -8,8 +8,8 @@ const ENGLISH_LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'Specialist'];
 
 // TEMP — remove once live payments are verified working end-to-end.
 const TEST_PROGRAMME = {
-  name: '🧪 Test Payment (₹20) — internal only',
-  fees: [['One-time', '₹20']],
+  name: '🧪 Test Payment (₹30) — internal only',
+  fees: [['One-time', '₹30']],
 };
 
 const parseFee = (label) => Number(String(label).replace(/[^\d]/g, '')) || 0;
