@@ -132,6 +132,41 @@ function Dashboard({ email }) {
     return () => { alive = false; };
   }, []);
 
+  const deleteRow = async (table, id) => {
+    if (!confirm('Delete this row permanently? This cannot be undone.')) return;
+    const { error: delErr } = await supabase.from(table).delete().eq('id', id);
+    if (delErr) {
+      setError(delErr.message);
+      return;
+    }
+    if (table === 'demo_requests') setDemos((rows) => rows.filter((r) => r.id !== id));
+    else setEnrolls((rows) => rows.filter((r) => r.id !== id));
+  };
+
+  const exportCsv = () => {
+    const isDemos = tab === 'demos';
+    const rows = isDemos ? demos : enrolls;
+    if (!rows || rows.length === 0) return;
+    const filename = `${isDemos ? 'demos' : 'enrollments'}-${new Date().toISOString().slice(0, 10)}.csv`;
+    const headers = Object.keys(rows[0]);
+    const escape = (v) => {
+      if (v === null || v === undefined) return '';
+      const s = String(v).replace(/"/g, '""');
+      return /[",\n]/.test(s) ? `"${s}"` : s;
+    };
+    const csv = [
+      headers.join(','),
+      ...rows.map((r) => headers.map((h) => escape(r[h])).join(',')),
+    ].join('\n');
+    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const totalRevenue = useMemo(
     () => (enrolls || []).reduce((s, r) => s + (Number(r.amount) || 0), 0),
     [enrolls]
@@ -161,24 +196,40 @@ function Dashboard({ email }) {
           <Kpi label="Total Revenue" value={enrolls === null ? '…' : `₹${totalRevenue.toLocaleString('en-IN')}`} />
         </div>
 
-        {/* Tabs */}
-        <div className="grid grid-cols-2 border border-border-light max-w-sm mb-6">
-          {[['demos', 'Demos'], ['enrolls', 'Enrollments']].map(([k, l]) => (
+        {/* Tabs + export controls */}
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-6 print:hidden">
+          <div className="grid grid-cols-2 border border-border-light max-w-sm">
+            {[['demos', 'Demos'], ['enrolls', 'Enrollments']].map(([k, l]) => (
+              <button
+                key={k}
+                onClick={() => setTab(k)}
+                className={`py-3 text-[11px] uppercase tracking-wider font-medium ${tab === k ? 'bg-navy text-white' : 'bg-white text-navy-dark hover:bg-offwhite'}`}
+              >
+                {l}
+              </button>
+            ))}
+          </div>
+          <div className="flex gap-3">
             <button
-              key={k}
-              onClick={() => setTab(k)}
-              className={`py-3 text-[11px] uppercase tracking-wider font-medium ${tab === k ? 'bg-navy text-white' : 'bg-white text-navy-dark hover:bg-offwhite'}`}
+              onClick={exportCsv}
+              className="text-[11px] uppercase tracking-wider border border-border-light px-4 py-2 hover:border-gold"
             >
-              {l}
+              Export CSV
             </button>
-          ))}
+            <button
+              onClick={() => window.print()}
+              className="text-[11px] uppercase tracking-wider border border-border-light px-4 py-2 hover:border-gold"
+            >
+              Print / PDF
+            </button>
+          </div>
         </div>
 
         {error && <p className="text-[11px] text-red-700 bg-red-50 border border-red-200 px-3 py-2 mb-4">{error}</p>}
 
         {tab === 'demos'
-          ? <DemosTable rows={demos} />
-          : <EnrollsTable rows={enrolls} />
+          ? <DemosTable rows={demos} onDelete={(id) => deleteRow('demo_requests', id)} />
+          : <EnrollsTable rows={enrolls} onDelete={(id) => deleteRow('enrollments', id)} />
         }
       </div>
     </div>
@@ -196,7 +247,7 @@ function Kpi({ label, value }) {
 
 const fmtDate = (iso) => iso ? new Date(iso).toLocaleString('en-IN', { dateStyle: 'medium', timeStyle: 'short' }) : '—';
 
-function DemosTable({ rows }) {
+function DemosTable({ rows, onDelete }) {
   if (rows === null) return <p className="body-text">Loading…</p>;
   if (rows.length === 0) return <p className="body-text">No demo requests yet.</p>;
   return (
@@ -204,7 +255,7 @@ function DemosTable({ rows }) {
       <table className="w-full text-[11px] min-w-[800px]">
         <thead>
           <tr className="bg-offwhite text-left text-[10px] uppercase tracking-wider text-navy-dark">
-            <Th>Submitted</Th><Th>Name</Th><Th>Email</Th><Th>Phone</Th><Th>Preferred</Th><Th>Issues</Th>
+            <Th>Submitted</Th><Th>Name</Th><Th>Email</Th><Th>Phone</Th><Th>Preferred</Th><Th>Issues</Th><Th className="print:hidden">Actions</Th>
           </tr>
         </thead>
         <tbody>
@@ -216,6 +267,7 @@ function DemosTable({ rows }) {
               <Td>{r.phone}</Td>
               <Td>{fmtDate(r.preferred_at)}</Td>
               <Td className="max-w-xs">{r.issues || '—'}</Td>
+              <Td className="print:hidden"><DeleteBtn onClick={() => onDelete(r.id)} /></Td>
             </tr>
           ))}
         </tbody>
@@ -224,7 +276,7 @@ function DemosTable({ rows }) {
   );
 }
 
-function EnrollsTable({ rows }) {
+function EnrollsTable({ rows, onDelete }) {
   if (rows === null) return <p className="body-text">Loading…</p>;
   if (rows.length === 0) return <p className="body-text">No enrollments yet.</p>;
   return (
@@ -235,7 +287,7 @@ function EnrollsTable({ rows }) {
             <Th>Submitted</Th><Th>Name</Th><Th>Email</Th><Th>Phone</Th>
             <Th>Programme</Th><Th>Duration</Th><Th>Amount</Th>
             <Th>Profile</Th><Th>Country / State</Th><Th>Level</Th>
-            <Th>Payment ID</Th>
+            <Th>Payment ID</Th><Th className="print:hidden">Actions</Th>
           </tr>
         </thead>
         <tbody>
@@ -252,6 +304,7 @@ function EnrollsTable({ rows }) {
               <Td>{[r.country, r.state].filter(Boolean).join(' / ') || '—'}</Td>
               <Td>{r.english_level || '—'}</Td>
               <Td className="font-mono text-[10px]">{r.payment_id || '—'}</Td>
+              <Td className="print:hidden"><DeleteBtn onClick={() => onDelete(r.id)} /></Td>
             </tr>
           ))}
         </tbody>
@@ -260,5 +313,13 @@ function EnrollsTable({ rows }) {
   );
 }
 
-const Th = ({ children }) => <th className="px-3 py-3 font-medium">{children}</th>;
+const Th = ({ children, className = '' }) => <th className={`px-3 py-3 font-medium ${className}`}>{children}</th>;
 const Td = ({ children, className = '' }) => <td className={`px-3 py-3 text-ink-slate ${className}`}>{children}</td>;
+const DeleteBtn = ({ onClick }) => (
+  <button
+    onClick={onClick}
+    className="text-[10px] uppercase tracking-wider text-red-700 border border-red-200 px-2 py-1 hover:bg-red-50"
+  >
+    Delete
+  </button>
+);

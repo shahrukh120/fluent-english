@@ -53,6 +53,21 @@ create policy "founder reads enrollments"
   to authenticated
   using ((auth.jwt() ->> 'email') = 'contact.fluentenglishedu@gmail.com');
 
+-- Founder can also delete rows from the admin panel.
+drop policy if exists "founder deletes demos" on public.demo_requests;
+create policy "founder deletes demos"
+  on public.demo_requests
+  for delete
+  to authenticated
+  using ((auth.jwt() ->> 'email') = 'contact.fluentenglishedu@gmail.com');
+
+drop policy if exists "founder deletes enrollments" on public.enrollments;
+create policy "founder deletes enrollments"
+  on public.enrollments
+  for delete
+  to authenticated
+  using ((auth.jwt() ->> 'email') = 'contact.fluentenglishedu@gmail.com');
+
 -- The serverless functions write rows using the service-role key, which bypasses
 -- RLS — so we don't need INSERT policies. Anonymous users cannot read OR write.
 
