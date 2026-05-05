@@ -88,9 +88,35 @@ export default async function handler(req, res) {
   if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
-    const { name, email, phone, datetime, issues } = req.body || {};
+    const { name, email, phone, datetime, issues, website } = req.body || {};
     if (!name || !email || !phone || !datetime) {
       return res.status(400).json({ error: 'Missing required fields.' });
+    }
+
+    // Honeypot — real users never see/fill the `website` field. Bots usually do.
+    // Pretend success so the spammer doesn't probe further.
+    if (website && String(website).trim() !== '') {
+      console.warn('submitDemo honeypot tripped:', { email, phone });
+      return res.status(200).json({ success: true });
+    }
+
+    // Rate-limit: same email or phone can only submit once every 10 minutes.
+    // Uses Supabase as the store — no extra service needed.
+    const supabaseEarly = getSupabase();
+    if (supabaseEarly) {
+      const tenMinAgo = new Date(Date.now() - 10 * 60 * 1000).toISOString();
+      const { count, error: rlErr } = await supabaseEarly
+        .from('demo_requests')
+        .select('id', { count: 'exact', head: true })
+        .or(`email.eq.${email},phone.eq.${phone}`)
+        .gte('created_at', tenMinAgo);
+      if (rlErr) {
+        console.error('submitDemo rate-limit check error:', rlErr);
+      } else if ((count || 0) > 0) {
+        return res.status(429).json({
+          error: 'A demo request from this email or phone was already received recently. Please wait a few minutes before trying again, or contact us at contact.fluentenglishedu@gmail.com.',
+        });
+      }
     }
 
     const transporter = nodemailer.createTransport({

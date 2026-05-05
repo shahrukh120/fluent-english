@@ -116,7 +116,7 @@ function SuccessPanel({ mode, reset }) {
 
 /* ─── DEMO FORM (no payment) ─────────────────────────────── */
 function DemoForm({ status, setStatus }) {
-  const [form, setForm] = useState({ name: '', email: '', phone: '', datetime: '', issues: '' });
+  const [form, setForm] = useState({ name: '', email: '', phone: '', datetime: '', issues: '', website: '' });
   const onChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const validate = () => {
@@ -158,6 +158,18 @@ function DemoForm({ status, setStatus }) {
       <Field label="Email Address" name="email" type="email" value={form.email} onChange={onChange} />
       <Field label="Phone Number" name="phone" type="tel" value={form.phone} onChange={onChange} />
       <Field label="Preferred Date & Time" name="datetime" type="datetime-local" value={form.datetime} onChange={onChange} />
+
+      {/* Honeypot — hidden from real users; bots autofill it. Server rejects if non-empty. */}
+      <input
+        type="text"
+        name="website"
+        tabIndex={-1}
+        autoComplete="off"
+        value={form.website}
+        onChange={onChange}
+        style={{ position: 'absolute', left: '-9999px', width: 1, height: 1, opacity: 0 }}
+        aria-hidden="true"
+      />
 
       <div>
         <label className="block text-[9px] uppercase tracking-label text-gold-mid mb-2">
