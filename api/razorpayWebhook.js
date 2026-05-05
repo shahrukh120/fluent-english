@@ -1,5 +1,6 @@
 import crypto from 'crypto';
 import nodemailer from 'nodemailer';
+import { getSupabase } from './_supabase.js';
 
 // Vercel auto-parses JSON, but webhook signature verification needs the
 // raw request body byte-for-byte. Disable the parser.
@@ -49,6 +50,32 @@ export default async function handler(req, res) {
     const p = event.payload?.payment?.entity || {};
     const notes = p.notes || {};
     const amountInr = (Number(p.amount) || 0) / 100;
+
+    // Safety-net: insert into enrollments if verifyPayment never ran (e.g. user
+    // closed the tab between paying and the redirect). Uses ignoreDuplicates so
+    // we never overwrite the richer row that verifyPayment writes when both fire.
+    const supabase = getSupabase();
+    if (!supabase) {
+      console.error('webhook enrollments upsert skipped: Supabase env vars missing');
+    } else {
+      try {
+        const { error: dbErr } = await supabase.from('enrollments').upsert(
+          {
+            name: notes.name || null,
+            email: notes.email || p.email || null,
+            phone: notes.phone || p.contact || null,
+            programme: notes.course || null,
+            amount: Math.round(amountInr) || null,
+            payment_id: p.id,
+            order_id: p.order_id,
+          },
+          { onConflict: 'payment_id', ignoreDuplicates: true }
+        );
+        if (dbErr) console.error('webhook enrollments upsert error:', dbErr);
+      } catch (e) {
+        console.error('webhook enrollments upsert threw:', e);
+      }
+    }
 
     const transporter = nodemailer.createTransport({
       service: 'gmail',
