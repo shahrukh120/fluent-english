@@ -6,12 +6,6 @@ import { COURSES } from '../data/courses.js';
 const PROFILES = ['Student', 'Working Professional', 'Other'];
 const ENGLISH_LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'Specialist'];
 
-// TEMP — remove once live payments are verified working end-to-end.
-const TEST_PROGRAMME = {
-  name: '🧪 Test Payment (₹30) — internal only',
-  fees: [['One-time', '₹30']],
-};
-
 const parseFee = (label) => Number(String(label).replace(/[^\d]/g, '')) || 0;
 
 export default function Contact() {
@@ -234,10 +228,7 @@ function EnrollForm({ status, setStatus, presetCourse }) {
   };
 
   const selectedCourse = useMemo(
-    () =>
-      form.programme === TEST_PROGRAMME.name
-        ? TEST_PROGRAMME
-        : COURSES.find((c) => c.name === form.programme),
+    () => COURSES.find((c) => c.name === form.programme),
     [form.programme]
   );
 
@@ -383,10 +374,7 @@ function EnrollForm({ status, setStatus, presetCourse }) {
         options={ENGLISH_LEVELS.map((l) => ({ label: l, value: l }))} />
 
       <SelectField label="Programme" name="programme" value={form.programme} onChange={onChange}
-        options={[
-          ...COURSES.map((c) => ({ label: c.name, value: c.name })),
-          { label: TEST_PROGRAMME.name, value: TEST_PROGRAMME.name },
-        ]} />
+        options={COURSES.map((c) => ({ label: c.name, value: c.name }))} />
 
       {selectedCourse && (
         <SelectField label="Duration" name="duration" value={form.duration} onChange={onChange}
