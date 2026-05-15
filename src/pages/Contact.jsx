@@ -2,7 +2,6 @@ import { useState, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import PageHero from '../components/PageHero.jsx';
 import { COURSES } from '../data/courses.js';
-import { formatUsd, inrToUsd } from '../lib/pricing.js';
 
 const PROFILES = ['Student', 'Working Professional', 'Other'];
 const ENGLISH_LEVELS = ['Beginner', 'Intermediate', 'Advanced', 'Specialist'];
@@ -337,8 +336,13 @@ function EnrollForm({ status, setStatus, presetCourse }) {
   };
 
   const durationOptions = selectedCourse
-    ? selectedCourse.fees.map(([d, p]) => ({ label: `${d} — ${p} (${formatUsd(p)})`, value: d }))
+    ? selectedCourse.fees.map(([d, p, u]) => ({ label: `${d} — ${p} (${u})`, value: d }))
     : [];
+
+  const selectedUsdLabel = useMemo(() => {
+    const row = selectedCourse?.fees.find(([d]) => d === form.duration);
+    return row?.[2] || '';
+  }, [selectedCourse, form.duration]);
 
   return (
     <form onSubmit={onSubmit} className="space-y-5">
@@ -389,9 +393,11 @@ function EnrollForm({ status, setStatus, presetCourse }) {
             <span className="block font-serif font-bold text-navy-royal text-[22px]">
               ₹{amount.toLocaleString('en-IN')}
             </span>
-            <span className="block text-[10px] text-ink-slate mt-0.5">
-              ~${inrToUsd(amount).toLocaleString('en-US')} · charged in INR
-            </span>
+            {selectedUsdLabel && (
+              <span className="block text-[10px] text-ink-slate mt-0.5">
+                {selectedUsdLabel} · charged in INR
+              </span>
+            )}
           </span>
         </div>
       )}

@@ -3,7 +3,6 @@ import { CornerBracket, DiamondOrnament, TripleDiamondDivider, GoldDiamondBullet
 import { LogoStacked } from '../components/Logo.jsx';
 import { COURSES } from '../data/courses.js';
 import { TESTIMONIALS, FEATURED_TESTIMONIAL } from '../data/testimonials.js';
-import { inrToUsd } from '../lib/pricing.js';
 
 const STATS = [
   ['5', 'Specialist Programmes'],
@@ -185,7 +184,7 @@ function ProgrammesOverview() {
               <p className="text-[8.5px] uppercase tracking-wider text-gold-mid font-sans">{c.tier}</p>
               <h3 className="font-serif font-bold text-[20px] mt-2 text-white">{c.name}</h3>
               <p className="font-serif font-bold text-[28px] mt-3 text-white">{c.priceLabel}</p>
-              <p className="text-[11px] text-white/55 mt-0.5">~${inrToUsd(c.price)} / hr</p>
+              <p className="text-[11px] text-white/55 mt-0.5">{c.priceUsdLabel}</p>
               <p className="text-[11px] text-white/65 mt-3 leading-relaxed">{c.hook}</p>
               <span className="block mt-5 text-[11px] text-gold-light group-hover:text-gold transition-colors">Learn More →</span>
             </Link>

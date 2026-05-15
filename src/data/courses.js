@@ -1,3 +1,7 @@
+// Fees: [duration, INR label, USD label]
+// USD values come directly from the official international brochure —
+// do not auto-convert. Update both columns together if pricing changes.
+
 export const COURSES = [
   {
     id: 'articulate-foundation',
@@ -5,6 +9,7 @@ export const COURSES = [
     name: 'Articulate Foundation',
     price: 299,
     priceLabel: '₹299/hr',
+    priceUsdLabel: '$3.19 / hr',
     bg: '#112A5C',
     hook: 'You blank out mid-sentence and avoid conversations because English feels foreign.',
     forYou: [
@@ -21,10 +26,10 @@ export const COURSES = [
     ],
     achievement: 'Hold conversations with ease, introduce yourself confidently, and never freeze in English again.',
     fees: [
-      ['15 days', '₹4,485'],
-      ['20 days', '₹5,980'],
-      ['25 days', '₹7,475'],
-      ['30 days', '₹8,970'],
+      ['15 days', '₹4,485', '$46.76'],
+      ['20 days', '₹5,980', '$62.34'],
+      ['25 days', '₹7,475', '$77.93'],
+      ['30 days', '₹8,970', '$93.52'],
     ],
     sessionInfo: ['60 Min / Session', 'Live & 1-on-1', 'Customised & Flexible', 'Daily Progress Report'],
   },
@@ -34,6 +39,7 @@ export const COURSES = [
     name: 'Communication Mastery',
     price: 399,
     priceLabel: '₹399/hr',
+    priceUsdLabel: '$4.16 / hr',
     bg: '#0D2248',
     hook: 'You speak English but trail off, ramble, or lose confidence mid-point.',
     forYou: [
@@ -49,10 +55,10 @@ export const COURSES = [
     ],
     achievement: 'Speak with structure and authority, lead group discussions, and present ideas without hesitation.',
     fees: [
-      ['15 days', '₹5,985'],
-      ['20 days', '₹7,980'],
-      ['25 days', '₹9,975'],
-      ['30 days', '₹11,970'],
+      ['15 days', '₹5,985', '$62.38'],
+      ['20 days', '₹7,980', '$83.18'],
+      ['25 days', '₹9,975', '$103.98'],
+      ['30 days', '₹11,970', '$124.78'],
     ],
     sessionInfo: ['60 Min / Session', 'Live & 1-on-1', 'Customised & Flexible', 'Daily Progress Report'],
   },
@@ -62,6 +68,7 @@ export const COURSES = [
     name: 'Professional English',
     price: 499,
     priceLabel: '₹499/hr',
+    priceUsdLabel: '$5.20 / hr',
     bg: '#091A38',
     hook: 'You communicate well socially but fumble in professional settings.',
     forYou: [
@@ -77,10 +84,10 @@ export const COURSES = [
     ],
     achievement: 'Walk into interviews with confidence, write with impact, and communicate with the polish of a seasoned professional.',
     fees: [
-      ['15 days', '₹7,485'],
-      ['20 days', '₹9,980'],
-      ['25 days', '₹12,475'],
-      ['30 days', '₹14,970'],
+      ['15 days', '₹7,485', '$78.02'],
+      ['20 days', '₹9,980', '$104.02'],
+      ['25 days', '₹12,475', '$130.03'],
+      ['30 days', '₹14,970', '$156.04'],
     ],
     sessionInfo: ['60 Min / Session', 'Live & 1-on-1', 'Customised & Flexible', 'Daily Progress Report'],
   },
@@ -90,6 +97,7 @@ export const COURSES = [
     name: 'Public Speaking',
     price: 499,
     priceLabel: '₹499/hr',
+    priceUsdLabel: '$5.20 / hr',
     bg: '#102040',
     hook: 'You want to speak with gravitas, presence, and persuasive power in any room.',
     forYou: [
@@ -105,11 +113,11 @@ export const COURSES = [
     ],
     achievement: 'Walk onto any stage — or into any room — with the calm authority of someone who has done it a hundred times.',
     fees: [
-      ['10 classes', '₹4,990'],
-      ['15 classes', '₹7,485'],
-      ['20 classes', '₹9,980'],
-      ['25 classes', '₹12,475'],
-      ['30 classes', '₹14,970'],
+      ['10 classes', '₹4,990', '$52.04'],
+      ['15 classes', '₹7,485', '$78.03'],
+      ['20 classes', '₹9,980', '$104.07'],
+      ['25 classes', '₹12,475', '$130.09'],
+      ['30 classes', '₹14,970', '$156.10'],
     ],
     sessionInfo: ['Base: 10 Classes', 'Extendable to 30', '60 Min / Session', '1-on-1 Live'],
   },
@@ -119,6 +127,7 @@ export const COURSES = [
     name: 'Interview Advantage',
     price: 399,
     priceLabel: '₹399/hr',
+    priceUsdLabel: '$4.16 / hr',
     bg: '#0A1832',
     hook: 'You go blank when asked "Tell me about yourself" — and want to walk in with composure.',
     forYou: [
@@ -134,11 +143,11 @@ export const COURSES = [
     ],
     achievement: 'Walk into any interview with structured answers, a clear head, and the composure of someone who owns the room.',
     fees: [
-      ['10 classes', '₹3,990'],
-      ['15 classes', '₹5,985'],
-      ['20 classes', '₹7,980'],
-      ['25 classes', '₹9,975'],
-      ['30 classes', '₹11,970'],
+      ['10 classes', '₹3,990', '$41.61'],
+      ['15 classes', '₹5,985', '$62.40'],
+      ['20 classes', '₹7,980', '$83.20'],
+      ['25 classes', '₹9,975', '$104.00'],
+      ['30 classes', '₹11,970', '$124.82'],
     ],
     sessionInfo: ['Base: 10 Classes', 'Extendable to 30', '60 Min / Session', '1-on-1 Live'],
   },

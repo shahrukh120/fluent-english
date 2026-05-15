@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero.jsx';
 import { COURSES } from '../data/courses.js';
-import { inrToUsd, formatUsd } from '../lib/pricing.js';
 
 function CourseSection({ c }) {
   return (
@@ -20,7 +19,7 @@ function CourseSection({ c }) {
             <span className="font-serif font-bold text-[34px] text-white">{c.priceLabel.split('/')[0]}</span>
             <span className="text-white/60 text-[12px]">/ session</span>
           </div>
-          <span className="text-white/55 text-[11px] mt-0.5">~${inrToUsd(c.price)} / session</span>
+          <span className="text-white/55 text-[11px] mt-0.5">{c.priceUsdLabel.replace('/ hr', '/ session')}</span>
         </div>
       </div>
 
@@ -59,12 +58,12 @@ function CourseSection({ c }) {
         <div className="bg-offwhite border-l border-border-light p-5">
           <p className="text-[9px] uppercase tracking-wider text-ink-slate font-semibold">Fee Breakdown</p>
           <div className="mt-3 space-y-2">
-            {c.fees.map(([d, p]) => (
+            {c.fees.map(([d, p, u]) => (
               <div key={d} className="flex justify-between items-baseline text-[11px]">
                 <span className="text-ink-slate">{d}</span>
                 <span className="text-right">
                   <span className="font-semibold text-navy-royal">{p}</span>
-                  <span className="block text-[9.5px] text-ink-slate/70 mt-0.5">{formatUsd(p)}</span>
+                  <span className="block text-[9.5px] text-ink-slate/70 mt-0.5">{u}</span>
                 </span>
               </div>
             ))}
