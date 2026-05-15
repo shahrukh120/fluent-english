@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageHero from '../components/PageHero.jsx';
 import { COURSES } from '../data/courses.js';
+import { inrToUsd, formatUsd } from '../lib/pricing.js';
 
 function CourseSection({ c }) {
   return (
@@ -14,9 +15,12 @@ function CourseSection({ c }) {
           <p className="text-[8.5px] uppercase tracking-wider text-gold-mid font-sans">{c.tier}</p>
           <h2 className="font-serif font-bold text-[28px] mt-1 text-white">{c.name}</h2>
         </div>
-        <div className="flex items-baseline gap-2">
-          <span className="font-serif font-bold text-[34px] text-white">{c.priceLabel.split('/')[0]}</span>
-          <span className="text-white/60 text-[12px]">/ session</span>
+        <div className="flex flex-col md:items-end">
+          <div className="flex items-baseline gap-2">
+            <span className="font-serif font-bold text-[34px] text-white">{c.priceLabel.split('/')[0]}</span>
+            <span className="text-white/60 text-[12px]">/ session</span>
+          </div>
+          <span className="text-white/55 text-[11px] mt-0.5">~${inrToUsd(c.price)} / session</span>
         </div>
       </div>
 
@@ -56,9 +60,12 @@ function CourseSection({ c }) {
           <p className="text-[9px] uppercase tracking-wider text-ink-slate font-semibold">Fee Breakdown</p>
           <div className="mt-3 space-y-2">
             {c.fees.map(([d, p]) => (
-              <div key={d} className="flex justify-between text-[11px]">
+              <div key={d} className="flex justify-between items-baseline text-[11px]">
                 <span className="text-ink-slate">{d}</span>
-                <span className="font-semibold text-navy-royal">{p}</span>
+                <span className="text-right">
+                  <span className="font-semibold text-navy-royal">{p}</span>
+                  <span className="block text-[9.5px] text-ink-slate/70 mt-0.5">{formatUsd(p)}</span>
+                </span>
               </div>
             ))}
           </div>
