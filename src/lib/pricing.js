@@ -2,7 +2,7 @@
 // Razorpay always charges in INR; the USD figure is shown only as a
 // reference for international visitors. Update USD_RATE here when the
 // exchange rate moves significantly (every 3–6 months is fine).
-export const USD_RATE = 84; // ₹ per $1
+export const USD_RATE = 95.89; // ₹ per $1
 
 const inrFromAny = (v) =>
   typeof v === 'number' ? v : Number(String(v).replace(/[^\d.]/g, '')) || 0;
